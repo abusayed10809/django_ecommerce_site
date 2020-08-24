@@ -22,16 +22,16 @@
                     <p>Shipping Information:</p>
                     <hr>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="address" placeholder="Address..">
+                        <input required class="form-control" type="text" name="state" placeholder="Phone no..">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="city" placeholder="City..">
+                        <input required class="form-control" type="text" name="address" placeholder="Address..">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="state" placeholder="State..">
+                        <input required class="form-control" type="text" name="city" placeholder="Area..">
                     </div>
                     <div class="form-field">
-                        <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                        <input required class="form-control" type="text" name="zipcode" placeholder="Zip code..">
                     </div>
                 </div>
                 <hr>
@@ -41,7 +41,7 @@
         
         <div class="box-element hidden" id="payment-info">
             <!-- <small>Paypal options</small> -->
-            <button id="make-payment">Order Confirmation</button>
+            <button id="make-payment" class="btn">Click to Confirm</button>
         </div>
 
     </div>
@@ -89,7 +89,7 @@
         // document.getElementById('user-info').innerHTML = ''
     }
 
-    if(shipping == 'False' && user != 'AnonymousUser')
+    if(user != 'AnonymousUser')
     {
         // hide entire form if user is logged in and shipping is false
         // document.getElementById('form-wrapper').classList.add("hidden");
@@ -103,10 +103,18 @@
     var form = document.getElementById('form')
     //csrftoken = form.getElementsByTagName("input")[0].value
 
+    
+
     form.addEventListener('submit', function(e){
         e.preventDefault()
-        console.log('form submitted')
-        document.getElementById('payment-info').classList.remove("hidden");
+        console.log('form submitted')    
+        if(form.state.value.length != 11 && form.state.value != '')
+        {
+            alert("Enter valid Phone number")
+        }
+        else{
+            document.getElementById('payment-info').classList.remove("hidden");
+        }
         // document.getElementById('form-button').classList.add('hidden')
         // document.getElementById('payment-info').classList.remove('hidden')
     })
