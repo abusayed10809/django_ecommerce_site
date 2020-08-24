@@ -38,10 +38,12 @@
                 <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
             </form>
         </div>
+        
         <div class="box-element hidden" id="payment-info">
-            <small>Paypal options</small>
-            <button id="make-payment">Make payment</button>
+            <!-- <small>Paypal options</small> -->
+            <button id="make-payment">Order Confirmation</button>
         </div>
+
     </div>
 </div>
 
@@ -78,22 +80,22 @@
 
     if(shipping == 'False')
     {
-        document.getElementById('shipping-info').innerHTML = ''
+        // document.getElementById('shipping-info').innerHTML = ''
     }
 
 
     if(user != 'AnonymousUser')
     {
-        document.getElementById('user-info').innerHTML = ''
+        // document.getElementById('user-info').innerHTML = ''
     }
 
     if(shipping == 'False' && user != 'AnonymousUser')
     {
         // hide entire form if user is logged in and shipping is false
-        document.getElementById('form-wrapper').classList.add("hidden");
+        // document.getElementById('form-wrapper').classList.add("hidden");
 
         // show payment if logged in users want to buy an item that doesn't require shipping
-        document.getElementById('payment-info').classList.remove("hidden");
+        // document.getElementById('payment-info').classList.remove("hidden");
 
     }
 
@@ -104,8 +106,9 @@
     form.addEventListener('submit', function(e){
         e.preventDefault()
         console.log('form submitted')
-        document.getElementById('form-button').classList.add('hidden')
-        document.getElementById('payment-info').classList.remove('hidden')
+        document.getElementById('payment-info').classList.remove("hidden");
+        // document.getElementById('form-button').classList.add('hidden')
+        // document.getElementById('payment-info').classList.remove('hidden')
     })
 
     document.getElementById('make-payment').addEventListener('click', function(e){
@@ -153,7 +156,7 @@
         .then((response) => response.json())
         .then((data) => {
             console.log('success:',data);
-            alert('transaction completed');
+            alert('Order Successful');
 
             cart = {}
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
