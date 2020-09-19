@@ -4,6 +4,7 @@
 
 {% block content %}
 
+
 <div class="row">
     <div class="col-lg-6">
         <div class="box-element" id="form-wrapper">
@@ -45,32 +46,32 @@
         </div>
 
     </div>
-</div>
 
-<div class="col-lg-6">
-    <div class="box-element">
-        <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
-        <hr>
-        <h3>Order Summary</h3>
-        <hr>
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+            <hr>
+            <h3>Order Summary</h3>
+            <hr>
+            
+            {% for item in items %}
+            <div class="cart-row">
+                <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                <div style="flex:2">
+                    <p>{{item.product.name}}</p>
+                </div>
+                <div style="flex:1">
+                    <p><strong>{{item.quantity}}</strong></p>
+                </div>
+                <div style="flex:1">
+                    <p><strong>Tk. {{item.product.price|floatformat:0}}</strong></p>
+                </div>
+            </div>
+            {% endfor %}
         
-        {% for item in items %}
-        <div class="cart-row">
-            <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-            <div style="flex:2">
-                <p>{{item.product.name}}</p>
-            </div>
-            <div style="flex:1">
-                <p><strong>{{item.quantity}}</strong></p>
-            </div>
-            <div style="flex:1">
-                <p><strong>Tk. {{item.product.price|floatformat:0}}</strong></p>
-            </div>
+            <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
+            <h5>Total: <strong>Tk. {{order.get_cart_total|floatformat:0}}</strong></h5>
         </div>
-        {% endfor %}
-    
-        <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
-        <h5>Total: <strong>Tk. {{order.get_cart_total|floatformat:0}}</strong></h5>
     </div>
 </div>
 
@@ -168,7 +169,7 @@
 
             cart = {}
             document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
-
+            
             window.location.href = "{% url 'store' %}"
         })
         
